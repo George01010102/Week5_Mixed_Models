@@ -136,3 +136,12 @@ ggpredict(mixed_model,
     x = "Toxin concentration (µM)",
     y = "Detoxification capacity"
   )
+#these graphs show that data groups share a similar slope, but a different intercept.
+#Mixed models allows for analysis of intercept variation between groups
+
+
+#We can assess overall model performance using R² values:
+library(MuMIn)
+r.squaredGLMM(mixed_model)
+#R²m (marginal): Variance explained by fixed effects alone (toxin concentration) = 10%
+#R²c (conditional): Variance explained by full model (fixed + random effects) = 70%
