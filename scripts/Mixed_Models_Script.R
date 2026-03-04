@@ -36,5 +36,6 @@ ggplot(benzo_data, aes(x = group, y = detox_exp, fill = factor(group))) +
   ) +
   theme(legend.position = "none")
 #boxplot shows how detoxification capacity differs between experimental batches
+#group 3 has substantially higher detoxification
 
 summarise(benzo_data)
