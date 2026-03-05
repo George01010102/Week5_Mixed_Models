@@ -49,3 +49,4 @@ summary(binomial_mixed_rep_fem)
 #visualising results
 ggpredict(binomial_mixed_rep_fem, terms = "cross") |>
   plot()
+
