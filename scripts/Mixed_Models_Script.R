@@ -145,3 +145,61 @@ library(MuMIn)
 r.squaredGLMM(mixed_model)
 #R²m (marginal): Variance explained by fixed effects alone (toxin concentration) = 10%
 #R²c (conditional): Variance explained by full model (fixed + random effects) = 70%
+
+
+#Checking model assumptions
+library(performance)
+check_model(mixed_model, detrend = FALSE)
+#Points shown outside contour lines for influential observations
+
+
+#Presenting results
+summary(mixed_model)
+#Random effects section shows: - Between-group variance (how much groups differ)
+#- Residual variance (within-group variation) - Standard deviations for each variance component
+
+#Fixed effects section shows: - Coefficient estimates - Standard errors
+#- Degrees of freedom (calculated using Satterthwaite approximation) - t-values and p-values
+
+
+#Model fit statistics
+library(MuMIn)
+r.squaredGLMM(mixed_model)
+#R²m (marginal): Proportion of variance explained by fixed effects alone
+#R²c (conditional): Proportion of variance explained by the complete model (fixed + random effects)
+
+
+#Creating tables
+library(sjPlot)
+
+tab_model(mixed_model, 
+          show.re.var = TRUE,
+          show.icc = TRUE,
+          show.r2 = TRUE)
+#sjplot package produces publication ready tables
+#This table includes: - Fixed effect estimates with 95% confidence intervals
+#- Random effect variance components
+#- Model fit statistics (R²m and R²c) - Number of observations and groups
+
+
+#Creating figures
+library(ggplot2)
+library(RColorBrewer)
+
+ggpredict(mixed_model,
+          benzo_um$wt_factor <- cut(benzo_um$wt),
+          terms = c("benzo_um", "group"), 
+          type = "random") |>  
+  plot(show_data = TRUE) + 
+  scale_colour_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2") +
+  facet_wrap(~group) +
+  labs(
+    x = "Toxin concentration (µM)",
+    y = "Detoxification capacity"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+
+
