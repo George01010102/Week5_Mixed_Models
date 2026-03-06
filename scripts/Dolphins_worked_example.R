@@ -12,6 +12,10 @@ summarise(dolphins)
 #Fitting the Model
 library(lmerTest)
 
+dolphmod <- lmer(vt ~ bodymass + direction + bodymass:direction + (1|animal), data = dolphins)
+summary(dolphmod)
+
+
 dolphmod <- lmer(vt ~ bodymass + direction + (1|animal), data = dolphins)
 summary(dolphmod)
 

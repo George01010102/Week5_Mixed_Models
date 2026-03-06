@@ -28,6 +28,8 @@ binomial_mixed_rep <- glmer(
   data = egg_hatch_data
 )
 
+summary(binomial_mixed_rep)
+
 # Random intercepts for replicate AND female (nested)
 binomial_mixed_rep_fem <- glmer(
   cbind(number_of_larvae, unhatched_eggs) ~ cross + (1|replicate/female_num),

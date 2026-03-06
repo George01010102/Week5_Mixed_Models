@@ -26,3 +26,5 @@ ggpredict(rats_correct,
           terms = c("Treatment", "Rat"),
           type = "random") |>
   plot(show_data = TRUE)
+
+emmeans(rats_correct, pairwise ~ Treatment)
